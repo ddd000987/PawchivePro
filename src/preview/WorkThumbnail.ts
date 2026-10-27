@@ -26,6 +26,7 @@
 
 import { EVT } from '../EVT'
 import { settings } from '../setting/Settings'
+import { PointerMotion } from './pointerMotion'
 import { parsePostKeyFromHref } from './previewAssets'
 
 /** 縮圖事件訂閱（PreviewWork＋縮圖下載鈕共用同一實例）；
@@ -64,11 +65,14 @@ class WorkThumbnail {
   /** 最後一次滑鼠真的移動的時間（瀏覽器自己補發的 mouseover 不算） */
   private lastMoveAt = 0
   /** 上次算作移動時的螢幕座標。用螢幕座標：頁面捲動時瀏覽器可能補發
-   * 座標不變的 mousemove；離它不到 MOVE_MIN_PX 的手抖（例如轉滾輪時）不算移動 */
+   * 座標不變的 mousemove；離它不到 MOVE_MIN_PX 的手抖不算移動 */
   private moveOrigin: { x: number; y: number } | null = null
+  /** 游標軌跡（螢幕座標）：預覽中判斷滑鼠是否明確移開，決定滾輪捲不捲網頁 */
+  private motion = new PointerMotion()
 
   private readonly onMouseMove = (ev: MouseEvent): void => {
     this.cursor = { x: ev.clientX, y: ev.clientY }
+    this.motion.add(Date.now(), ev.screenX, ev.screenY)
     const o = this.moveOrigin
     if (
       !o ||
@@ -85,9 +89,9 @@ class WorkThumbnail {
     return this.lastMoveAt > time
   }
 
-  /** 最近 ms 毫秒內滑鼠是否在移動 */
-  public movedWithin(ms: number): boolean {
-    return Date.now() - this.lastMoveAt < ms
+  /** 最近 ms 毫秒內滑鼠是否移動了至少 px 像素 */
+  public movedFar(ms: number, px: number): boolean {
+    return this.motion.movedFar(Date.now(), ms, px)
   }
 
   /** 最後已知游標位置（離開網頁後為 null） */
@@ -166,6 +170,7 @@ class WorkThumbnail {
     this.intervalId = 0
     this.cursor = null
     this.moveOrigin = null
+    this.motion.clear()
   }
 
   private syncActive(): void {

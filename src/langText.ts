@@ -98,6 +98,12 @@ export const langText = {
     `Switch preview image with wheel`,
     `ホイールでプレビュー画像を切り替え`,
   ],
+  _f_wheelScrollPageMoveDistance: [
+    `移动多少像素后滚轮改为滚动网页`,
+    `移動多少像素後滾輪改為捲動網頁`,
+    `Mouse movement (px) before the wheel scrolls the page`,
+    `ホイールでページをスクロールするまでのマウス移動量 (px)`,
+  ],
   _previewOn: [
     `悬停预览：开`,
     `懸停預覽：開`,
@@ -257,10 +263,10 @@ export const langText = {
     `クロールが最後まで完了するたびにキャッシュが 1 件保存されます。最大 20 件で、いっぱいになったら先に古いものを削除してください。`,
   ],
   _help_cache_2: [
-    `下载区下载的是「当前挂载」的那一条。到「抓取缓存」页点「挂载」可以换成别条，挂载后再到下载页点「开始下载」。`,
-    `下載區下載的是「目前掛載」的那一筆。到「快取」頁按「掛載」可以換成別筆，掛載後再到下載頁按「開始下載」。`,
-    `The download area downloads the entry that is currently mounted. Click “Mount” on the “Crawl cache” page to switch to another entry, then click “Start download” on the Download page.`,
-    `ダウンロード欄でダウンロードされるのは「現在マウントされている」1 件です。「クロールキャッシュ」ページで「マウント」をクリックすると別のものに切り替えられるので、その後ダウンロードページで「ダウンロード開始」をクリックします。`,
+    `下载区下载的是「当前挂载」的那一条。在抓取页下方的「抓取缓存」点「挂载」可以换成别条，挂载后再到下载页点「开始下载」。`,
+    `下載區下載的是「目前掛載」的那一筆。在抓取頁下方的「抓取快取」按「掛載」可以換成別筆，掛載後再到下載頁按「開始下載」。`,
+    `The download area downloads the entry that is currently mounted. Click “Mount” under “Crawl cache” at the bottom of the Crawl page to switch to another entry, then click “Start download” on the Download page.`,
+    `ダウンロード欄でダウンロードされるのは「現在マウントされている」1 件です。クロールページ下部の「クロールキャッシュ」で「マウント」をクリックすると別のものに切り替えられるので、その後ダウンロードページで「ダウンロード開始」をクリックします。`,
   ],
   _help_cache_3: [
     `下载中或暂停中不能挂载其他缓存，要先停止或等下载完成。`,
@@ -408,11 +414,17 @@ export const langText = {
     `Also trigger preview on text-only post links without thumbnails.`,
     `サムネイルのないテキストのみの投稿リンクでもプレビューを表示します。`,
   ],
+  _d_wheelScrollPageMoveDistance: [
+    `预览显示时，鼠标在 0.2 秒内移动超过这个距离（像素），滚轮才会滚动网页；只动一点点仍然切换图片。数字越大越不容易误滚网页。`,
+    `預覽顯示時，滑鼠在 0.2 秒內移動超過這個距離（像素），滾輪才會捲動網頁；只動一點點仍然切換圖片。數字越大越不容易誤捲網頁。`,
+    `While previewing, the wheel scrolls the page only if the mouse moved at least this far (px) in the last 0.2 s; smaller movements still switch images. A larger number makes accidental page scrolling less likely.`,
+    `プレビュー表示中、0.2 秒以内にマウスがこの距離（px）以上動いたときだけホイールでページをスクロールします。少し動いただけなら画像を切り替えます。数値が大きいほど誤ってスクロールしにくくなります。`,
+  ],
   _d_wheelScrollSwitchImageOnPreviewWork: [
-    `预览显示时，鼠标不动滚动滚轮会切换同一帖子的多张图片；一边移动鼠标一边滚动则滚动网页。`,
-    `預覽顯示時，滑鼠不動時滾動滾輪會切換同一帖子的多張圖片；一邊移動滑鼠一邊滾動則捲動網頁。`,
-    `While previewing, scrolling with the mouse still switches between images of the same post; scrolling while moving the mouse scrolls the page.`,
-    `プレビュー表示中、マウスを止めてホイールを回すと同じ投稿内の画像を切り替え、マウスを動かしながら回すとページをスクロールします。`,
+    `预览显示时，鼠标不动滚动滚轮会切换同一帖子的多张图片；一边明显移动鼠标一边滚动则滚动网页（移动距离可在下方设置）。`,
+    `預覽顯示時，滑鼠不動時滾動滾輪會切換同一帖子的多張圖片；一邊明顯移動滑鼠一邊滾動則捲動網頁（移動距離可在下方設定）。`,
+    `While previewing, scrolling with the mouse still switches between images of the same post; scrolling while clearly moving the mouse scrolls the page (the distance is set below).`,
+    `プレビュー表示中、マウスを止めてホイールを回すと同じ投稿内の画像を切り替え、マウスをはっきり動かしながら回すとページをスクロールします（移動量は下で設定）。`,
   ],
   _d_showDownloadBtnOnThumb: [
     `鼠标悬停在帖子卡片上时，在右上角显示整帖下载按钮。`,
@@ -523,10 +535,10 @@ export const langText = {
     `クロールの API リクエスト間で待機する秒数（0 で待機なし、最大 10 秒）。小さくすると速くなりますが 429 が発生しやすくなります。429 を受けた場合は自動でバックオフして再試行します。`,
   ],
   _d_autoMountCache: [
-    `开启：抓取完成并存入快取后立刻挂载（可配合自动开始下载）。关闭：抓取结果只存进快取，下载区维持原本挂载的快取，要下载时到快取页按「挂载」。未能存入快取的结果（单帖快抓、中途停止、快取已满）一律直接挂载，避免遗失`,
-    `開啟：抓取完成並存入快取後立刻掛載（可配合自動開始下載）。關閉：抓取結果只存進快取，下載區維持原本掛載的快取，要下載時到快取頁按「掛載」。未能存入快取的結果（單帖快抓、中途停止、快取已滿）一律直接掛載，避免遺失`,
-    `On: mount the crawl right after it is saved to the cache (works with auto-start download). Off: results are only saved to the cache and the download area keeps the previously mounted cache; mount one on the Cache page to download it. Results that cannot be saved (quick single-post crawl, stopped crawl, full cache) are always mounted so they are not lost`,
-    `オン：クロール完了後にキャッシュへ保存した直後にマウントします（自動ダウンロード開始と併用できます）。オフ：クロール結果はキャッシュに保存するだけで、ダウンロード領域は以前マウントしたキャッシュのままになります。ダウンロードするにはキャッシュページで「マウント」を押してください。キャッシュに保存できなかった結果（単一投稿の高速クロール、途中停止、キャッシュ満杯）は、失われないよう常にそのままマウントされます`,
+    `开启：抓取完成并存入快取后立刻挂载（可配合自动开始下载）。关闭：抓取结果只存进快取，下载区维持原本挂载的快取，要下载时到抓取页的「抓取缓存」按「挂载」。未能存入快取的结果（单帖快抓、中途停止、快取已满）一律直接挂载，避免遗失`,
+    `開啟：抓取完成並存入快取後立刻掛載（可配合自動開始下載）。關閉：抓取結果只存進快取，下載區維持原本掛載的快取，要下載時到抓取頁的「抓取快取」按「掛載」。未能存入快取的結果（單帖快抓、中途停止、快取已滿）一律直接掛載，避免遺失`,
+    `On: mount the crawl right after it is saved to the cache (works with auto-start download). Off: results are only saved to the cache and the download area keeps the previously mounted cache; mount one under “Crawl cache” on the Crawl page to download it. Results that cannot be saved (quick single-post crawl, stopped crawl, full cache) are always mounted so they are not lost`,
+    `オン：クロール完了後にキャッシュへ保存した直後にマウントします（自動ダウンロード開始と併用できます）。オフ：クロール結果はキャッシュに保存するだけで、ダウンロード領域は以前マウントしたキャッシュのままになります。ダウンロードするにはクロールページの「クロールキャッシュ」で「マウント」を押してください。キャッシュに保存できなかった結果（単一投稿の高速クロール、途中停止、キャッシュ満杯）は、失われないよう常にそのままマウントされます`,
   ],
   _d_autoStartDownload: [
     `抓取完成并挂载结果后自动开始下载（未挂载时不会自动开始）。`,
@@ -835,10 +847,10 @@ export const langText = {
     `マウントしました：{}。ダウンロードページで「ダウンロード開始」を押すとダウンロードできます`,
   ],
   _cacheSavedNotMounted: [
-    `已存入抓取快取：{}（未自动挂载，到快取页按「挂载」）`,
-    `已存入抓取快取：{}（未自動掛載，到快取頁按「掛載」）`,
-    `Saved to the crawl cache: {} (not auto-mounted; press “Mount” on the Cache page)`,
-    `クロールキャッシュに保存しました：{}（自動マウントはされていません。キャッシュページで「マウント」を押してください）`,
+    `已存入抓取快取：{}（未自动挂载，到抓取页的「抓取缓存」按「挂载」）`,
+    `已存入抓取快取：{}（未自動掛載，到抓取頁的「抓取快取」按「掛載」）`,
+    `Saved to the crawl cache: {} (not auto-mounted; press “Mount” under “Crawl cache” on the Crawl page)`,
+    `クロールキャッシュに保存しました：{}（自動マウントはされていません。クロールページの「クロールキャッシュ」で「マウント」を押してください）`,
   ],
   _cacheDeleteMountedBusy: [
     `这笔快取正在下载中，不能删除`,
@@ -847,10 +859,10 @@ export const langText = {
     `このキャッシュはダウンロード中のため削除できません`,
   ],
   _noMountedCache: [
-    `尚未挂载抓取快取，请先到快取页挂载`,
-    `尚未掛載抓取快取，請先到快取頁掛載`,
-    `No crawl cache is mounted; mount one on the Cache page first`,
-    `クロールキャッシュがマウントされていません。先にキャッシュページでマウントしてください`,
+    `尚未挂载抓取缓存，请先到抓取页的「抓取缓存」挂载`,
+    `尚未掛載抓取快取，請先到抓取頁的「抓取快取」掛載`,
+    `No crawl cache is mounted; mount one under “Crawl cache” on the Crawl page first`,
+    `クロールキャッシュがマウントされていません。先にクロールページの「クロールキャッシュ」でマウントしてください`,
   ],
   _mountNone: [
     `尚未挂载抓取快取。请到「抓取快取」页选一笔按「挂载」`,
@@ -1095,6 +1107,24 @@ export const langText = {
     `匯入設定`,
     `Import settings`,
     `設定をインポート`,
+  ],
+  _resetSettings: [
+    `恢复默认设置`,
+    `恢復預設設定`,
+    `Restore defaults`,
+    `既定の設定に戻す`,
+  ],
+  _resetSettingsConfirm: [
+    `确定要把所有设置恢复为默认值吗？\n\n包括语言、预览、抓取筛选、下载、命名规则和快捷键，无法复原（可以先导出设置备份）。\n下载记录、抓取缓存和已选择的文件夹不受影响。`,
+    `確定要把所有設定恢復成預設值嗎？\n\n包括語言、預覽、抓取篩選、下載、命名規則和快捷鍵，無法復原（可以先匯出設定備份）。\n下載記錄、抓取快取和已選擇的資料夾不受影響。`,
+    `Restore all settings to their defaults?\n\nThis includes language, preview, crawl filters, download, naming rules and hotkeys, and cannot be undone (export your settings first to keep a backup).\nDownload history, the crawl cache and the chosen folder are not affected.`,
+    `すべての設定を既定値に戻しますか？\n\n言語、プレビュー、クロールの絞り込み、ダウンロード、命名規則、ショートカットキーが対象で、元に戻せません（先に設定をエクスポートしてバックアップできます）。\nダウンロード記録、クロールキャッシュ、選択済みのフォルダーは影響を受けません。`,
+  ],
+  _resetSettingsDone: [
+    `已恢复默认设置`,
+    `已恢復預設設定`,
+    `Settings restored to defaults`,
+    `既定の設定に戻しました`,
   ],
   _f_userSetLang: [`界面语言`, `介面語言`, `Language`, `表示言語`],
   _f_skipDownloaded: [

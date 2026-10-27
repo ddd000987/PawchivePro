@@ -11,7 +11,7 @@ License: **GPL-3.0-or-later** (see [LICENSE](LICENSE)).
 
 ## Features
 
-- **Hover preview**: hover a post thumbnail to see full images; switch images with the mouse wheel while the mouse is still (scrolling while moving the mouse scrolls the page). Info bar fields and position are configurable.
+- **Hover preview**: hover a post thumbnail to see full images; switch images with the mouse wheel while the mouse is still (scrolling while clearly moving the mouse scrolls the page; the distance is configurable). Info bar fields and position are configurable.
 - **Batch crawl**: crawl every post of a creator in one click, with filters for title, date, post ID, attachment count, service, file type and size.
 - **Crawl cache**: each finished crawl is saved (up to 20 entries). Entries can be renamed, deleted, or mounted as the current download target.
 - **Downloads**

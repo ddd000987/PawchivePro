@@ -1,12 +1,12 @@
 /* license: GPL-3.0-or-later; http://www.gnu.org/licenses/gpl-3.0.txt */
-/* 設定中心：快取分頁（快取列表、掛載／重新命名／刪除） */
+/* 設定中心：抓取頁下方的抓取快取區塊（自動掛載開關、快取列表、掛載／重新命名／刪除） */
 
 import { crawlCache } from '../../download/CrawlCache'
 import { lang } from '../../Language'
 import { LangTextKey } from '../../langText'
 import { states } from '../../store/States'
 import { toast } from '../../Toast'
-import { section, tipCard } from './controls'
+import { checkRow, section, tipCard } from './controls'
 import type { CenterContext } from './context'
 
 export class CacheView {
@@ -17,6 +17,7 @@ export class CacheView {
   public build(host: HTMLDivElement): void {
     const body = section(host, '_secCache')
     tipCard(body, '_cacheTip')
+    checkRow(body, 'autoMountCache', '_f_autoMountCache')
     this.cacheList = document.createElement('div')
     body.appendChild(this.cacheList)
     this.render()

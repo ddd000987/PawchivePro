@@ -31,7 +31,6 @@ export function buildDownload(
     max: '10',
     step: '0.1',
   })
-  checkRow(body, 'autoMountCache', '_f_autoMountCache')
   checkRow(body, 'autoStartDownload', '_f_autoStartDownload')
   checkRow(body, 'setFileDownloadOrder', '_f_setFileDownloadOrder')
   checkRow(body, 'noCoverFile', '_f_noCoverFile')

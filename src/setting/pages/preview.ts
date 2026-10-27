@@ -12,7 +12,7 @@ import type {
   PreviewInfoPlace,
 } from '../../preview/previewInfo'
 import { settings, PreviewSettings } from '../Settings'
-import { checkRow, section, tipCard } from './controls'
+import { checkRow, inputRow, section, tipCard } from './controls'
 
 /** 預覽設定鍵的文案 key */
 const PREVIEW_LABELS: Record<keyof PreviewSettings, LangTextKey> = {
@@ -24,12 +24,16 @@ const PREVIEW_LABELS: Record<keyof PreviewSettings, LangTextKey> = {
   previewInfoPlacement: '_previewInfoTitle',
   allowPreviewCoverThumbnail: '_f_allowPreviewCoverThumbnail',
   wheelScrollSwitchImageOnPreviewWork: '_f_wheelScroll',
+  wheelScrollPageMoveDistance: '_f_wheelScrollPageMoveDistance',
   showDownloadBtnOnThumb: '_f_showDownloadBtnOnThumb',
 }
 
 /** 純布林的預覽鍵（數字鍵與物件型鍵另有專屬控件） */
 const PREVIEW_BOOL_KEYS: Array<
-  Exclude<keyof PreviewSettings, 'previewWorkWait' | 'previewInfoPlacement'>
+  Exclude<
+    keyof PreviewSettings,
+    'previewWorkWait' | 'wheelScrollPageMoveDistance' | 'previewInfoPlacement'
+  >
 > = [
   'PreviewWork',
   'previewOriginalImage',
@@ -66,28 +70,24 @@ export function buildPreview(host: HTMLDivElement): void {
   for (const key of PREVIEW_BOOL_KEYS) {
     checkRow(body, key, PREVIEW_LABELS[key])
   }
-  // 懸停延遲（ms，0–2000）
-  const waitRow = document.createElement('label')
-  waitRow.className = 'pwpSC-row pwpSC-field'
-  waitRow.dataset.key = 'previewWorkWait'
-  waitRow.dataset.desc = '_d_previewWorkWait'
-  const waitInput = document.createElement('input')
-  waitInput.type = 'number'
-  waitInput.min = '0'
-  waitInput.max = '2000'
-  waitInput.step = '50'
-  waitInput.dataset.skey = 'previewWorkWait'
-  waitInput.value = String(settings.get('previewWorkWait'))
-  waitInput.addEventListener('change', () => {
-    const v = Math.max(0, Math.min(2000, Number(waitInput.value) || 0))
-    waitInput.value = String(v)
-    settings.set('previewWorkWait', v)
-  })
-  const waitText = document.createElement('span')
-  waitText.dataset.xztext = PREVIEW_LABELS.previewWorkWait
-  waitText.textContent = lang.transl(PREVIEW_LABELS.previewWorkWait)
-  waitRow.append(waitInput, waitText)
-  body.appendChild(waitRow)
+  // 懸停延遲（ms）
+  inputRow(
+    body,
+    'previewWorkWait',
+    PREVIEW_LABELS.previewWorkWait,
+    'number',
+    undefined,
+    { min: '0', max: '2000', step: '50' }
+  )
+  // 滑鼠移動多少像素後，預覽中的滾輪改為捲動網頁
+  inputRow(
+    body,
+    'wheelScrollPageMoveDistance',
+    PREVIEW_LABELS.wheelScrollPageMoveDistance,
+    'number',
+    undefined,
+    { min: '1', max: '2000', step: '5' }
+  )
 
   // 資訊列內容：每個欄位獨立選「上方／下方／不顯示」
   const infoBody = section(host, '_previewInfoTitle')

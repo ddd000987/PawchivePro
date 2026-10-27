@@ -34,6 +34,8 @@ interface PreviewSettings {
   allowPreviewCoverThumbnail: boolean
   /** 預覽中滾輪切圖 */
   wheelScrollSwitchImageOnPreviewWork: boolean
+  /** 預覽中滑鼠移動超過這麼多像素時，滾輪改為捲動網頁 */
+  wheelScrollPageMoveDistance: number
   /** 在帖子縮圖上顯示下載按鈕*/
   showDownloadBtnOnThumb: boolean
 }
@@ -208,6 +210,7 @@ const defaultSettings: PawchiveSettings = {
   previewInfoPlacement: defaultPreviewInfoPlacement,
   allowPreviewCoverThumbnail: false,
   wheelScrollSwitchImageOnPreviewWork: true,
+  wheelScrollPageMoveDistance: 30,
   showDownloadBtnOnThumb: true,
   downloadThread: Config.downloadThreadDefault,
   downloadInterval: 0,
@@ -245,7 +248,8 @@ const defaultSettings: PawchiveSettings = {
 const numberRules: Partial<
   Record<SettingKey, { min: number; max: number; integer?: boolean }>
 > = {
-  previewWorkWait: { min: 0, max: 5000, integer: true },
+  previewWorkWait: { min: 0, max: 2000, integer: true },
+  wheelScrollPageMoveDistance: { min: 1, max: 2000, integer: true },
   downloadThread: { min: 1, max: Config.downloadThreadMax, integer: true },
   downloadInterval: { min: 0, max: 3600 },
   crawlInterval: { min: 0, max: 10 },
@@ -337,6 +341,13 @@ class Settings {
     this.store[key] = value
     EVT.fire('settingChange', { key, value })
     this.scheduleSave()
+  }
+
+  /** 所有設定恢復預設值：逐鍵走 set，各模組照常收到 settingChange 即時更新 */
+  public resetAll(): void {
+    for (const key of Object.keys(defaultSettings) as SettingKey[]) {
+      this.set(key, defaultSettings[key] as never)
+    }
   }
 
   private scheduleSave(): void {

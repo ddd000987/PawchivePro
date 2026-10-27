@@ -1,10 +1,12 @@
 /* license: GPL-3.0-or-later; http://www.gnu.org/licenses/gpl-3.0.txt */
-/* 設定中心：通用分頁（語言、跳過已下載、本地資料夾、浮動按鈕、快捷鍵、設定／下載記錄匯出入） */
+/* 設定中心：通用分頁（語言、跳過已下載、本地資料夾、浮動按鈕、快捷鍵、設定匯出入／恢復預設、下載記錄匯出入） */
 
 import { EVT } from '../../EVT'
 import { lang } from '../../Language'
 import { LangTextKey } from '../../langText'
+import { toast } from '../../Toast'
 import { HotkeyEditor } from '../HotkeyEditor'
+import { settings } from '../Settings'
 import { btnRow, checkRow, section, selectRow } from './controls'
 import type { CenterContext } from './context'
 import type { FolderStatusView } from './folderStatus'
@@ -65,6 +67,14 @@ export function buildCommon(
     {
       labelKey: '_importSettings',
       onClick: () => EVT.fire('importSettings'),
+    },
+    {
+      labelKey: '_resetSettings',
+      onClick: () => {
+        if (!window.confirm(lang.transl('_resetSettingsConfirm'))) return
+        settings.resetAll()
+        toast.success(lang.transl('_resetSettingsDone'))
+      },
     },
   ])
 

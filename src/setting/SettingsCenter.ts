@@ -40,14 +40,7 @@ import { StatusRows } from './pages/status'
 
 /** 設定中心的側欄分頁 */
 type CenterPage =
-  | 'home'
-  | 'preview'
-  | 'crawl'
-  | 'download'
-  | 'cache'
-  | 'naming'
-  | 'common'
-  | 'help'
+  'home' | 'preview' | 'crawl' | 'download' | 'naming' | 'common' | 'help'
 
 /** 側欄分頁定義（圖示用純文字元號） */
 const PAGES: Array<{ id: CenterPage; icon: string; label: LangTextKey }> = [
@@ -55,7 +48,6 @@ const PAGES: Array<{ id: CenterPage; icon: string; label: LangTextKey }> = [
   { id: 'preview', icon: '◉', label: '_sc_preview' },
   { id: 'crawl', icon: '⇩', label: '_secCrawl' },
   { id: 'download', icon: '⬇', label: '_secDownload' },
-  { id: 'cache', icon: '🗂', label: '_secCache' },
   { id: 'naming', icon: '✎', label: '_secNaming' },
   { id: 'common', icon: '⚙', label: '_sc_common' },
   { id: 'help', icon: '?', label: '_sc_help' },
@@ -274,13 +266,14 @@ class SettingsCenter {
       this.crawlControls,
       this.crawlProgress
     )
+    // 抓取快取列表放在抓取頁最下方
+    this.cache.build(this.pageEls.get('crawl')!)
     buildDownload(this.pageEls.get('download')!, this.ctx, {
       status: this.status,
       mountInfo: this.mountInfo,
       dlControls: this.dlControls,
       logView: this.logView,
     })
-    this.cache.build(this.pageEls.get('cache')!)
     this.naming.build(this.pageEls.get('naming')!)
     buildCommon(this.pageEls.get('common')!, this.ctx, this.folderStatus)
     buildHelp(this.pageEls.get('help')!)
@@ -609,11 +602,11 @@ class SettingsCenter {
     EVT.on(EVT.list.crawlProgress, () => this.crawlProgress.scheduleRender())
     // 抓取完成（有結果）自動切到下載頁並展開
     EVT.on(EVT.list.readyDownload, () => this.open('download'))
-    // 快取異動時重繪快取頁
+    // 快取異動時重繪快取列表
     EVT.on(EVT.list.cacheChange, () => this.cache.render())
     // 日誌區內容變化：節流後重繪
     EVT.on(EVT.list.logAdd, () => this.logView.scheduleRender())
-    // 掛載狀態或下載任務狀態變化：快取頁按鈕（可否掛載）與掛載詳情卡一起重繪
+    // 掛載狀態或下載任務狀態變化：快取列表按鈕（可否掛載）與掛載詳情卡一起重繪
     for (const ev of [
       EVT.list.mountChange,
       EVT.list.downloadStart,

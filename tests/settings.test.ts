@@ -1,10 +1,12 @@
 import { describe, expect, it, vi } from 'vitest'
 import { Config } from '../src/Config'
 import {
+  defaultSettings,
   migrateLegacySettings,
   sanitizeSetting,
   settings,
 } from '../src/setting/Settings'
+import type { SettingKey } from '../src/setting/Settings'
 
 describe('sanitizeSetting', () => {
   it('downloadThread：夾取、四捨五入、非有限數與型別不符回預設', () => {
@@ -77,6 +79,29 @@ describe('settings.restore', () => {
     expect('dupliStrategy' in store.store).toBe(false)
     expect('skipExistingFiles' in store.store).toBe(false)
     expect('switchImageByKeyboard' in store.store).toBe(false)
+  })
+})
+
+describe('settings.resetAll', () => {
+  it('所有鍵恢復預設，物件鍵不共用預設物件的引用', () => {
+    settings.set('downloadThread', 1)
+    settings.set('namingRule', 'x/{index}')
+    settings.set('PreviewWork', false)
+    settings.set('wheelScrollPageMoveDistance', 200)
+    settings.set('previewInfoPlacement', {
+      ...settings.get('previewInfoPlacement'),
+      title: 'none',
+    })
+
+    settings.resetAll()
+
+    for (const key of Object.keys(defaultSettings) as SettingKey[]) {
+      expect(settings.get(key)).toEqual(defaultSettings[key])
+    }
+    expect(settings.get('hotkeys')).not.toBe(defaultSettings.hotkeys)
+    expect(settings.get('previewInfoPlacement')).not.toBe(
+      defaultSettings.previewInfoPlacement
+    )
   })
 })
 

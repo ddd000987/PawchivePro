@@ -86,8 +86,9 @@ interface CurrentPreview {
  * 再確認（見 scheduleClose），三種過渡情況都不誤殺。 */
 const CLOSE_DELAY = 120
 
-/** 滾輪前這段時間內滑鼠有移動，就當成「邊移動邊滾」，讓頁面捲動 */
-const POINTER_MOVING_MS = 150
+/** 滾輪前這段時間內滑鼠移動超過設定的距離（wheelScrollPageMoveDistance），
+ * 就當成「邊移動邊滾」，讓頁面捲動 */
+const POINTER_MOVING_MS = 200
 
 class PreviewWork {
   private wrap: HTMLDivElement | null = null
@@ -552,11 +553,19 @@ class PreviewWork {
   /** 滾輪：預覽顯示中＋開關開＋滑鼠沒在動就攔截，頁面不捲動。
    * 多圖時真正切圖；載入中／單圖／失敗時 switchImage 因無圖可切而 no-op，
    * 只起到鎖住頁面捲動的作用。
-   * 滑鼠邊移動邊滾時不攔截，頁面照常捲動。 */
+   * 滑鼠邊移動邊滾、而且移動超過設定的距離時不攔截，頁面照常捲動；
+   * 只動一點點（手抖、微調位置）照樣切圖。 */
   private onWheelScroll(ev: WheelEvent): void {
     if (!states.previewWorkIsShow) return
     if (!settings.get('wheelScrollSwitchImageOnPreviewWork')) return
-    if (workThumbnail.movedWithin(POINTER_MOVING_MS)) return
+    if (
+      workThumbnail.movedFar(
+        POINTER_MOVING_MS,
+        settings.get('wheelScrollPageMoveDistance')
+      )
+    ) {
+      return
+    }
     // 原圖檢視器開著時讓它自己捲動
     if (document.querySelector('#originSizeWrap')) return
     ev.preventDefault()

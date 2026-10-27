@@ -1,7 +1,7 @@
 /*
  * license: GPL-3.0-or-later; http://www.gnu.org/licenses/gpl-3.0.txt
  * 抓取快取：crawlComplete 有結果時自動把本輪 store 快照一筆
- * （chrome.storage.local 持久化），用戶可稍後從快取頁「掛載」並下載。
+ * （chrome.storage.local 持久化），用戶可稍後從抓取頁的快取列表「掛載」並下載。
  * 動機：新一輪抓取的 crawlStart 會清空 store，快取是那之前的逃生艙。
  * 掛載＝把某筆快取載入 store 當作目前下載目標；開始下載由用戶到下載頁手動按。
  * 本模組同時擁有「抓取完成後要不要掛載新結果」的決定權。

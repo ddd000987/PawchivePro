@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented here. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/).
 
+## [1.0.1] - 2026-10-28
+
+### Added
+
+- A "Restore defaults" button on the Common page resets every setting after a confirmation. Download history, the crawl cache and the chosen folder are kept.
+
+### Changed
+
+- In the preview, the wheel scrolls the page only when the mouse has moved at least 30 px in the last 0.2 s. Small movements (a shaky hand, nudging the cursor) keep switching images. The distance can be changed in the Preview settings.
+- The crawl cache list moved to the bottom of the Crawl page, together with the "Auto-mount cache after crawl" option (previously on the Download page); the separate Crawl cache page is gone.
+- The hover delay setting uses the same layout as the other fields (label on the left, input on the right) and is limited to 0–2000 ms.
+
 ## [1.0.0] - 2026-10-28
 
 First public release. Changes since 0.2.0:

@@ -1,5 +1,5 @@
 /* license: GPL-3.0-or-later; http://www.gnu.org/licenses/gpl-3.0.txt */
-/* 設定中心：抓取分頁（抓取控制、過濾條件） */
+/* 設定中心：抓取分頁（抓取控制、過濾條件；最下方的抓取快取見 cache.ts） */
 
 import { checkRow, inputRow, section } from './controls'
 import type { CenterContext } from './context'
