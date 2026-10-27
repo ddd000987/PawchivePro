@@ -5,26 +5,18 @@ English | [繁體中文](README.zh-TW.md)
 A Chrome / Edge (Manifest V3) extension for previewing and batch-downloading post attachments on Kemono-family sites:
 
 - **Pawchive**: `pawchive.pw` (and subdomains) — the main, tested target.
-- **Kemono**: `kemono.cr` (and subdomains; the legacy `kemono.su` / `kemono.party` domains are still matched) — **best effort, not verified**. As of October 2026 the site appears unmaintained: the main site and thumbnails load, but the original-file servers `n1`–`n4.kemono.cr` could not be reached, so original-image downloads from Kemono may fail. The Kemono code is kept in case the site recovers.
+- **Kemono**: `kemono.cr` (and subdomains, plus the legacy `kemono.su` / `kemono.party`) — **best effort, not verified**. Since October 2026 the original-file servers `n1`–`n4.kemono.cr` have been unreachable, so original-image downloads may fail.
 
 License: **GPL-3.0-or-later** (see [LICENSE](LICENSE)).
 
 ## Features
 
-- **Hover preview**: hover a post thumbnail to see full images; switch images with the mouse wheel while the mouse is still (scrolling while clearly moving the mouse scrolls the page; the distance is configurable). Info bar fields and position are configurable.
-- **Batch crawl**: crawl every post of a creator in one click, with filters for title, date, post ID, attachment count, service, file type and size.
-- **Crawl cache**: each finished crawl is saved (up to 20 entries). Entries can be renamed, deleted, or mounted as the current download target.
-- **Downloads**
-  - Start / stop, pause / resume, and re-download all (shown while paused).
-  - Adjustable concurrency and interval. Files over 200 MiB are handed to the browser's own downloader so they don't sit in tab memory.
-  - Original images by default (can switch to thumbnails).
-  - Stall detection: a connection with no data for 30 s is aborted and retried; 5xx / rate limits back off according to `Retry-After`; failed files are retried in a final pass.
-  - Pre-download check: skips files already in the download history, and — once you pick your download folder in the extension's own window — files that already exist there. Folder access belongs to the extension; websites can't see it.
-- **Naming rules**: build paths from tags such as `{service}`, `{creator}`, `{post_id}`, `{title}`, `{index}`, `{file_name}`, `{ext}`. Default: `kemono/{service}/{creator}-{creator_id}/{post_id}-{title}/{index}-{file_name}.{ext}`.
-- **Download history**: export / import / clear; crawl results can be exported as CSV.
-- **Hotkeys**: Alt+X toggles the panel, Alt+Z crawls the current page, Alt+P toggles preview (all three are configurable). While previewing, D downloads the whole post and C downloads the current image.
-- **Log**: warnings and errors are shown at the bottom of the Download page (repeated messages are merged) and can be copied.
-- **UI languages**: 简体中文, 繁體中文, English, 日本語.
+- **Hover preview**: hover a thumbnail to see full images; switch with the mouse wheel.
+- **Batch crawl**: crawl every post of a creator in one click, filtered by title, date, file type and more.
+- **Reliable downloads**: pause, adjust concurrency, and retry failures automatically; files already downloaded or already in your folder are skipped.
+- **Custom file names**: build download paths from tags such as `{creator}`, `{post_id}` and `{title}`.
+- **Cache and history**: crawl results are saved for later downloads; download history can be exported and imported.
+- **Hotkeys** and **four UI languages** (简体中文, 繁體中文, English, 日本語).
 
 ## Install
 
@@ -44,7 +36,7 @@ After changing the code, run `npm run build` again and click reload on the exten
 
 ## Privacy
 
-PawchivePro collects nothing. It has no analytics and no remote server; settings and history stay in your browser. See [PRIVACY.md](PRIVACY.md).
+PawchivePro collects nothing. It has no analytics and no remote server; settings and history stay in your browser. Access to the download folder used for the existing-file check belongs to the extension; websites can't see it. See [PRIVACY.md](PRIVACY.md).
 
 ## Development
 
