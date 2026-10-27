@@ -1,0 +1,83 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_appName__",
+  "version": "1.0.0",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "minimum_chrome_version": "101",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "downloads",
+    "storage",
+    "unlimitedStorage",
+    "declarativeNetRequestWithHostAccess"
+  ],
+  "host_permissions": [
+    "*://kemono.party/*",
+    "*://*.kemono.party/*",
+    "*://kemono.su/*",
+    "*://*.kemono.su/*",
+    "*://kemono.cr/*",
+    "*://*.kemono.cr/*",
+    "*://pawchive.pw/*",
+    "*://*.pawchive.pw/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://kemono.party/*",
+        "*://*.kemono.party/*",
+        "*://kemono.su/*",
+        "*://*.kemono.su/*",
+        "*://kemono.cr/*",
+        "*://*.kemono.cr/*",
+        "*://pawchive.pw/*",
+        "*://*.pawchive.pw/*"
+      ],
+      "css": ["style/style.css"],
+      "js": ["js/content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  "action": {
+    "default_title": "__MSG_appName__",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "declarative_net_request_rules.json"
+      }
+    ]
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["lib/listen_history_change.js"],
+      "matches": [
+        "*://kemono.party/*",
+        "*://*.kemono.party/*",
+        "*://kemono.su/*",
+        "*://*.kemono.su/*",
+        "*://kemono.cr/*",
+        "*://*.kemono.cr/*",
+        "*://pawchive.pw/*",
+        "*://*.pawchive.pw/*"
+      ]
+    }
+  ]
+}

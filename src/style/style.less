@@ -1,0 +1,789 @@
+// PawchivePro content-script styles (toast, settings center, preview, thumb button).
+
+.pwpToast {
+  position: fixed;
+  z-index: 2147483647;
+  padding: 6px 12px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: 0;
+  pointer-events: none;
+  max-width: 60vw;
+  word-break: break-word;
+}
+
+// 設定中心開關按鈕（面板本身為置中 modal 大框）
+#pwpPanelBtn {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2147483646;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+// 設定中心（PBD 風格簡化版：置中深色 modal、左側欄、頂部搜尋、可折疊分區）
+#pwpSCBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483644;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+#pwpSettingsCenter {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2147483646;
+  display: flex;
+  flex-direction: column;
+  width: min(980px, 94vw);
+  height: min(720px, 88vh);
+  overflow: hidden;
+  border: 1px solid #33404f;
+  border-radius: 12px;
+  background: #1d2733;
+  color: #d7e0ea;
+  font-size: 14px;
+  line-height: 1.6;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.55);
+}
+
+#pwpSettingsCenter .pwpSC-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #2c3947;
+  background: #17202b;
+}
+
+#pwpSettingsCenter .pwpSC-brand {
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  white-space: nowrap;
+}
+
+#pwpSettingsCenter .pwpSC-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 4px 12px;
+  border: 1px solid #3a4a5d;
+  border-radius: 16px;
+  background: #0f1720;
+}
+
+#pwpSettingsCenter .pwpSC-searchIcon {
+  color: #8fa3b8;
+}
+
+#pwpSettingsCenter .pwpSC-search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #e6edf3;
+  font-size: 13px;
+}
+
+#pwpSettingsCenter .pwpSC-close {
+  border: none;
+  background: none;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  color: #8fa3b8;
+  padding: 0 4px;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+#pwpSettingsCenter .pwpSC-main {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+#pwpSettingsCenter .pwpSC-nav {
+  flex: 0 0 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 8px;
+  background: #17202b;
+  border-right: 1px solid #2c3947;
+  overflow-y: auto;
+}
+
+#pwpSettingsCenter .pwpSC-navBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border: none;
+  border-left: 3px solid transparent;
+  border-radius: 0 8px 8px 0;
+  background: none;
+  color: #aebdd0;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+
+  &:hover {
+    background: #1d2733;
+    color: #fff;
+  }
+
+  &.active {
+    background: #243344;
+    border-left-color: #0a84ff;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  &.pwpSC-empty {
+    opacity: 0.35;
+  }
+}
+
+#pwpSettingsCenter .pwpSC-navIcon {
+  width: 20px;
+  text-align: center;
+}
+
+#pwpSettingsCenter .pwpSC-pages {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 16px 20px 24px;
+}
+
+#pwpSettingsCenter .pwpSC-page {
+  max-width: 720px;
+}
+
+#pwpSettingsCenter .pwpSC-section {
+  margin-bottom: 14px;
+  border: 1px solid #2c3947;
+  border-radius: 10px;
+  background: #24313f;
+  overflow: hidden;
+}
+
+#pwpSettingsCenter .pwpSC-secHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background: #2a3a4d;
+  }
+}
+
+#pwpSettingsCenter .pwpSC-chev {
+  color: #8fa3b8;
+  transition: transform 0.15s;
+}
+
+#pwpSettingsCenter .pwpSC-section.collapsed .pwpSC-chev {
+  transform: rotate(180deg);
+}
+
+#pwpSettingsCenter .pwpSC-section.collapsed .pwpSC-secBody {
+  display: none;
+}
+
+#pwpSettingsCenter .pwpSC-secBody {
+  padding: 4px 14px 14px;
+}
+
+// 搜尋中：強制展開所有分區，命中才顯示
+#pwpSettingsCenter.pwpSC-searching .pwpSC-secBody {
+  display: block !important;
+}
+
+#pwpSettingsCenter .pwpSC-tip {
+  margin: 10px 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(10, 132, 255, 0.4);
+  border-radius: 8px;
+  background: rgba(10, 132, 255, 0.12);
+  color: #9fc6ee;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+#pwpSettingsCenter .pwpSC-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+#pwpSettingsCenter label.pwpSC-row input[type='checkbox'] {
+  accent-color: #0a84ff;
+}
+
+#pwpSettingsCenter .pwpSC-field {
+  justify-content: space-between;
+  cursor: default;
+}
+
+#pwpSettingsCenter .pwpSC-field > span:first-child {
+  flex: 0 0 38%;
+}
+
+#pwpSettingsCenter .pwpSC-field input,
+#pwpSettingsCenter .pwpSC-field select {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 8px;
+  border: 1px solid #3a4a5d;
+  border-radius: 6px;
+  background: #0f1720;
+  color: #e6edf3;
+  font-size: 13px;
+}
+
+#pwpSettingsCenter .pwpSC-field input[type='number'] {
+  max-width: 140px;
+}
+
+#pwpSettingsCenter .pwpSC-btnRow {
+  flex-wrap: wrap;
+  cursor: default;
+}
+
+#pwpSettingsCenter .pwpSC-btnRow button {
+  padding: 6px 14px;
+  border: 1px solid #0a84ff;
+  border-radius: 6px;
+  background: #2b3b4f;
+  color: #7fb8ff;
+  font-size: 13px;
+  cursor: pointer;
+
+  &:hover {
+    background: #0a84ff;
+    color: #fff;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      background: #2b3b4f;
+      color: #7fb8ff;
+    }
+  }
+}
+
+#pwpSettingsCenter .pwpSC-folderBlock[hidden] {
+  display: none;
+}
+
+#pwpSettingsCenter .pwpSC-status {
+  color: #8fa3b8;
+  font-size: 12px;
+  cursor: default;
+}
+
+// 抓取進度區塊：行距比一般設定列緊湊
+#pwpSettingsCenter .pwpSC-crawlProgress .pwpSC-row {
+  margin: 3px 0;
+}
+
+// 日誌區：深色底的捲動列表，等寬小字，依等級上色
+#pwpSettingsCenter .pwpSC-logList {
+  max-height: 240px;
+  overflow: auto;
+  margin-top: 8px;
+  padding: 6px 8px;
+  border: 1px solid #2c3947;
+  border-radius: 8px;
+  background: #17202b;
+  font-family: Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  cursor: text;
+}
+
+#pwpSettingsCenter .pwpSC-logRow {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  color: #c7d3df;
+  word-break: break-all;
+}
+
+#pwpSettingsCenter .pwpSC-logTime {
+  flex: 0 0 auto;
+  color: #6f8398;
+}
+
+#pwpSettingsCenter .pwpSC-logMsg {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+#pwpSettingsCenter .pwpSC-logCount {
+  flex: 0 0 auto;
+  padding: 0 6px;
+  border-radius: 8px;
+  background: #2c3947;
+  color: #9fc6ee;
+}
+
+#pwpSettingsCenter .pwpSC-log-success .pwpSC-logMsg {
+  color: #4caf50;
+}
+
+#pwpSettingsCenter .pwpSC-log-warning .pwpSC-logMsg {
+  color: #ffb74d;
+}
+
+#pwpSettingsCenter .pwpSC-log-error .pwpSC-logMsg {
+  color: #f44336;
+}
+
+#pwpSettingsCenter .pwpSC-logEmpty {
+  color: #6f8398;
+  text-align: center;
+  padding: 8px 0;
+}
+
+// 命名標籤一覽：token 按鈕＋說明
+#pwpSettingsCenter .pwpSC-tagGrid {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  cursor: default;
+}
+
+#pwpSettingsCenter .pwpSC-tagRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#pwpSettingsCenter .pwpSC-tagRow button {
+  min-width: 110px;
+  padding: 2px 10px;
+  border: 1px solid #0a84ff;
+  border-radius: 6px;
+  background: #2b3b4f;
+  color: #7fb8ff;
+  font-family: Consolas, monospace;
+  font-size: 13px;
+  cursor: pointer;
+
+  &:hover {
+    background: #0a84ff;
+    color: #fff;
+  }
+}
+
+#pwpSettingsCenter .pwpSC-tagRow span {
+  color: #8fa3b8;
+  font-size: 12px;
+}
+
+// 說明條目：項目符號風格的段落
+#pwpSettingsCenter .pwpSC-helpItem {
+  display: block;
+  position: relative;
+  margin: 6px 0;
+  padding-left: 14px;
+  color: #c3d0dd;
+  font-size: 13px;
+  line-height: 1.7;
+  cursor: default;
+
+  &::before {
+    content: '•';
+    position: absolute;
+    left: 2px;
+    color: #0a84ff;
+  }
+}
+
+// 命名規則範例：code＋說明＋複製按鈕
+#pwpSettingsCenter .pwpSC-exRow {
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #1c2733;
+  cursor: default;
+
+  code {
+    flex: 1 1 100%;
+    color: #7fb8ff;
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    word-break: break-all;
+    user-select: all;
+  }
+
+  .pwpSC-exDesc {
+    flex: 1 1 0;
+    min-width: 0;
+    color: #8fa3b8;
+    font-size: 12px;
+  }
+
+  button {
+    padding: 2px 10px;
+    border: 1px solid #0a84ff;
+    border-radius: 6px;
+    background: #2b3b4f;
+    color: #7fb8ff;
+    font-size: 12px;
+    cursor: pointer;
+
+    &:hover {
+      background: #0a84ff;
+      color: #fff;
+    }
+  }
+}
+
+#pwpSettingsCenter .pwpSC-subhead {
+  font-weight: bold;
+  color: #fff;
+  margin: 12px 0 4px;
+}
+
+// 抓取快取卡片
+#pwpSettingsCenter .pwpSC-cacheCard {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  padding: 8px 10px;
+  border: 1px solid #2b3b4f;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: default;
+}
+
+// 已掛載的快取卡與掛載詳情卡：強調邊框，一眼看出目前下載目標
+#pwpSettingsCenter .pwpSC-cacheCard.mounted,
+#pwpSettingsCenter .pwpSC-mountInfo {
+  border-color: #0a84ff;
+}
+
+#pwpSettingsCenter .pwpSC-cacheTitle {
+  font-weight: bold;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 設定列懸停介紹浮層（body 層單例，pointer-events:none 以免干擾懸停）
+#pwpSCDescTip {
+  position: fixed;
+  z-index: 2147483647;
+  display: none;
+  max-width: 320px;
+  padding: 8px 12px;
+  border: 1px solid #0a84ff;
+  border-radius: 8px;
+  background: rgba(15, 23, 32, 0.97);
+  color: #cfe3f7;
+  font-size: 12px;
+  line-height: 1.6;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+#pwpSettingsCenter .pwpSC-noResult {
+  display: none;
+  padding: 40px 24px;
+  text-align: center;
+  color: #8fa3b8;
+  margin: auto;
+}
+
+// 無命中時藏主區，空提示置中
+#pwpSettingsCenter.pwpSC-emptyResult .pwpSC-main {
+  display: none;
+}
+
+#pwpSettingsCenter.pwpSC-emptyResult .pwpSC-noResult {
+  display: block;
+}
+
+// 快捷鍵表（HotkeyEditor 掛載內容深色化）
+#pwpSettingsCenter .pwp-hotkeys-table {
+  margin: 4px 0;
+}
+
+#pwpSettingsCenter .pwp-hotkeys-head,
+#pwpSettingsCenter .pwp-hotkeys-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 6px;
+  align-items: center;
+  padding: 4px 0;
+}
+
+#pwpSettingsCenter .pwp-hotkeys-head {
+  font-weight: bold;
+  color: #fff;
+  border-bottom: 1px solid #3a4a5d;
+}
+
+#pwpSettingsCenter .pwp-hotkeys-row .value {
+  font-family: monospace;
+  color: #e6edf3;
+}
+
+#pwpSettingsCenter .pwp-hotkeys-row .value.recording {
+  color: #0a84ff;
+}
+
+#pwpSettingsCenter .pwp-hotkeys-row .escCancel {
+  display: none;
+  margin-left: 6px;
+}
+
+#pwpSettingsCenter .pwp-hotkeys-row.recording .escCancel {
+  display: inline;
+}
+
+#pwpSettingsCenter .pwp-hotkeys-btns {
+  margin-top: 6px;
+}
+
+#pwpSettingsCenter .pwp-hotkeys-row button,
+#pwpSettingsCenter .pwp-hotkeys-btns button {
+  padding: 2px 10px;
+  border: 1px solid #3a4a5d;
+  border-radius: 4px;
+  background: #0f1720;
+  color: #aebdd0;
+  font-size: 12px;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #0a84ff;
+    color: #fff;
+  }
+}
+
+// 下載進度條（ProgressBar 掛載內容深色化）
+#pwpSettingsCenter .progressBarWrap {
+  margin-top: 6px;
+  width: 100%;
+}
+
+#pwpSettingsCenter .progressBarWrap .total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #8fa3b8;
+}
+
+#pwpSettingsCenter .progressBarWrap .right1 {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#pwpSettingsCenter .progressBarList {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#pwpSettingsCenter .progressBar {
+  height: 8px;
+  background: #0f1720;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#pwpSettingsCenter .progressBar .progress {
+  height: 100%;
+  width: 0;
+  background: #0a84ff;
+}
+
+#pwpSettingsCenter .progressTip2 {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #8fa3b8;
+  gap: 6px;
+}
+
+#pwpSettingsCenter .progressTip2 .fileName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+#pwpSettingsCenter .downloadError {
+  color: #f44336;
+}
+
+// 深色捲軸
+#pwpSettingsCenter .pwpSC-pages::-webkit-scrollbar,
+#pwpSettingsCenter .pwpSC-nav::-webkit-scrollbar {
+  width: 8px;
+}
+
+#pwpSettingsCenter .pwpSC-pages::-webkit-scrollbar-thumb,
+#pwpSettingsCenter .pwpSC-nav::-webkit-scrollbar-thumb {
+  background: #0a84ff;
+  border-radius: 4px;
+}
+
+#pwpSettingsCenter .pwpSC-pages::-webkit-scrollbar-track,
+#pwpSettingsCenter .pwpSC-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+// 懸停預覽（源自 PBD #previewWorkWrap/#previewWorkTip；
+// 刪 .r18/.ai/.bmk，加 .preview-only 警告——警告字串由 JS 組裝，此處只留樣式錨點）
+// 本輪：摘要條拆成上下兩列（.pwpPreviewTip，DOM 順序＝上列 → 圖 → 下列），
+// 空的一列由 JS 設 display:none，所以框線不會殘留
+#previewWorkWrap {
+  position: fixed;
+  z-index: 2147483645;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+#previewWorkWrap img {
+  display: block;
+  object-fit: contain;
+  // 封面佔位圖在 fitImage 生效前先靠 CSS 封頂，避免大圖短暫溢出
+  max-width: 92vw;
+  max-height: 86vh;
+}
+
+.pwpPreviewTip {
+  padding: 6px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60vw;
+}
+
+// 上列（圖片上方）：分隔線在下緣；下列（圖片下方）：分隔線在上緣
+#previewWorkTipTop {
+  border-bottom: 1px solid #eee;
+}
+
+#previewWorkTipBottom {
+  border-top: 1px solid #eee;
+}
+
+// 精簡原圖 viewer
+#originSizeWrap {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483646;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  cursor: zoom-out;
+}
+
+#originSizeWrap img {
+  max-width: 96vw;
+  max-height: 96vh;
+  object-fit: contain;
+}
+
+// 舊批次面板 #pwpCrawlPanel 已退役（由深色設定中心 #pwpSettingsCenter 接管，見上）
+
+// 已下載加框
+a[data-postkey].pwp-downloaded {
+  outline: 2px solid #4caf50;
+  outline-offset: 2px;
+}
+
+#pwpStopCrawl {
+  position: fixed;
+  bottom: 64px;
+  right: 16px;
+  z-index: 2147483645;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #f44336;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+// 縮圖下載鈕（移植 PBD .btnOnThumb；absolute 避免滾動時停留原地）
+.btnOnThumb {
+  position: absolute;
+  z-index: 99999;
+  display: none;
+  left: 0px;
+  top: 0px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  padding: 0;
+  text-align: center;
+  background-color: #0a84ff;
+  border-radius: 4px;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  font-size: 18px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+// 快捷鍵表已併入設定中心（樣式見 #pwpSettingsCenter .pwp-hotkeys-*）

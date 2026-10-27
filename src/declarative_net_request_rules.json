@@ -1,0 +1,368 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        {
+          "header": "Access-Control-Allow-Origin",
+          "operation": "set",
+          "value": "*"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||kemono.party",
+      "resourceTypes": ["xmlhttprequest", "image"],
+      "initiatorDomains": [
+        "kemono.cr",
+        "kemono.su",
+        "kemono.party",
+        "pawchive.pw"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        {
+          "header": "Access-Control-Allow-Origin",
+          "operation": "set",
+          "value": "*"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||kemono.cr",
+      "resourceTypes": ["xmlhttprequest", "image"],
+      "initiatorDomains": [
+        "kemono.cr",
+        "kemono.su",
+        "kemono.party",
+        "pawchive.pw"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        {
+          "header": "Access-Control-Allow-Origin",
+          "operation": "set",
+          "value": "*"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||pawchive.pw",
+      "resourceTypes": ["xmlhttprequest", "image"],
+      "initiatorDomains": [
+        "kemono.cr",
+        "kemono.su",
+        "kemono.party",
+        "pawchive.pw"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://kemono.su/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||img.kemono.su/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  },
+  {
+    "id": 5,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://pawchive.pw/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||img.pawchive.pw/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  },
+  {
+    "id": 6,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        {
+          "header": "Access-Control-Allow-Origin",
+          "operation": "set",
+          "value": "*"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||kemono.su",
+      "resourceTypes": ["xmlhttprequest", "image"],
+      "initiatorDomains": [
+        "kemono.cr",
+        "kemono.su",
+        "kemono.party",
+        "pawchive.pw"
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://kemono.party/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||img.kemono.party/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  },
+  {
+    "id": 8,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://kemono.cr/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||img.kemono.cr/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  },
+  {
+    "id": 9,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://kemono.cr/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||n1.kemono.cr/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  },
+  {
+    "id": 10,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://kemono.cr/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||n2.kemono.cr/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  },
+  {
+    "id": 11,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://kemono.cr/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||n3.kemono.cr/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  },
+  {
+    "id": 12,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://kemono.cr/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||n4.kemono.cr/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  },
+  {
+    "id": 13,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://kemono.su/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||n1.kemono.su/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  },
+  {
+    "id": 14,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://kemono.party/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||n1.kemono.party/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  },
+  {
+    "id": 16,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://pawchive.pw/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||n1.pawchive.pw/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  },
+  {
+    "id": 17,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://kemono.su/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||file.kemono.su/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  },
+  {
+    "id": 18,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://kemono.party/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||file.kemono.party/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  },
+  {
+    "id": 19,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://kemono.cr/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||file.kemono.cr/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  },
+  {
+    "id": 20,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        {
+          "header": "Referer",
+          "operation": "set",
+          "value": "https://pawchive.pw/"
+        }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||file.pawchive.pw/",
+      "resourceTypes": ["xmlhttprequest", "image"]
+    }
+  }
+]
