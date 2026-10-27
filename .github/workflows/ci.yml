@@ -43,9 +43,12 @@ jobs:
         run: |
           v=$(node -p "require('./src/manifest.json').version")
           [ "v$v" = "$GITHUB_REF_NAME" ] || { echo "tag $GITHUB_REF_NAME != manifest v$v"; exit 1; }
+      - name: Release notes from CHANGELOG
+        run: node scripts/release-notes.js "$GITHUB_REF_NAME" > release-notes.md
       - run: npm run build
       - run: cd dist && zip -r "../pawchive-pro-$GITHUB_REF_NAME.zip" .
       - uses: softprops/action-gh-release@v3
         with:
           files: pawchive-pro-*.zip
+          body_path: release-notes.md
           generate_release_notes: true
