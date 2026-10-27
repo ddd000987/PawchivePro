@@ -43,7 +43,7 @@ jobs:
         run: |
           v=$(node -p "require('./src/manifest.json').version")
           [ "v$v" = "$GITHUB_REF_NAME" ] || { echo "tag $GITHUB_REF_NAME != manifest v$v"; exit 1; }
-      - name: Release notes from CHANGELOG
+      - name: Release notes from CHANGELOG.md and CHANGELOG.zh-TW.md
         run: node scripts/release-notes.js "$GITHUB_REF_NAME" > release-notes.md
       - run: npm run build
       - run: cd dist && zip -r "../pawchive-pro-$GITHUB_REF_NAME.zip" .
