@@ -18,6 +18,18 @@ Chrome / Edge（Manifest V3）擴充功能，用來預覽與批次下載 Kemono 
 - **快取與記錄**：抓取結果會自動保存，之後可直接拿來下載；下載記錄可匯出／匯入。
 - **快捷鍵**與**四種介面語言**（简体中文、繁體中文、English、日本語）。
 
+<p align="center">
+  <img src="docs/images/crawl.zh-TW.webp" alt="抓取頁：抓取結果與篩選條件" width="49%">
+  <img src="docs/images/download.zh-TW.webp" alt="下載頁：下載控制與進度" width="49%">
+</p>
+
+<details>
+<summary>命名設定</summary>
+
+<img src="docs/images/naming.zh-TW.webp" alt="命名頁：命名規則與可用標籤">
+
+</details>
+
 ## 安裝
 
 沒有上架商店。請自行建置，或從 [Releases](../../releases) 下載 zip 解壓縮。

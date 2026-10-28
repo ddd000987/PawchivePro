@@ -18,6 +18,18 @@ License: **GPL-3.0-or-later** (see [LICENSE](LICENSE)).
 - **Cache and history**: crawl results are saved for later downloads; download history can be exported and imported.
 - **Hotkeys** and **four UI languages** (简体中文, 繁體中文, English, 日本語).
 
+<p align="center">
+  <img src="docs/images/crawl.en.webp" alt="Crawl page: crawl result and filters" width="49%">
+  <img src="docs/images/download.en.webp" alt="Download page: download controls and progress" width="49%">
+</p>
+
+<details>
+<summary>Naming settings</summary>
+
+<img src="docs/images/naming.en.webp" alt="Naming page: naming rule and available tags">
+
+</details>
+
 ## Install
 
 There is no store listing. Build it yourself, or download the zip from [Releases](../../releases) and unzip it.
